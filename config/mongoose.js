@@ -3,8 +3,12 @@ require('dotenv').config();
 // require mongoose
 const mongoose = require('mongoose');
 // connect to database
-mongoose.connect(process.env.mongoDbUrl);
+const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/todo_app_db';
 
+mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 // acquire the connection (to check if it is successful)
 const db = mongoose.connection;
 // check for error
